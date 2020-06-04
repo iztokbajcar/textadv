@@ -46,11 +46,8 @@ Room* soba1;
 Room* soba2;
 
 // Ukazi
-void save() {
-	std::ofstream ofs("filename");
-	boost::archive::text_oarchive oa(ofs);
-	oa << (game -> rooms);
-	std::cout << "Uspešno shranjeno." << std::endl;
+void test() {
+	std::cout << "Test." << std::endl;
 }
 
 int main() {
@@ -77,9 +74,9 @@ int main() {
 	soba2 -> setExit(Room::E, soba1);
 
 	// ukazi
-	Action* actSave = new Action("shrani");
-	actSave -> setExecute(&save);
-	game -> addCommand(actSave);
+	Action* actTest = new Action("test");
+	actTest -> setExecute(&test);
+	game -> addCommand(actTest);
 
 	// Za debug
 	std::cout << "INTERFACE @ " << gameInterface << std::endl;
