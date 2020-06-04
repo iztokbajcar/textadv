@@ -12,6 +12,7 @@ namespace textadv {
 			Action(std::string c);  // konstruktor
 			std::string getCommand();
 			void setExecute(void (*exec)());
+			void execute();
 	};
 }
 

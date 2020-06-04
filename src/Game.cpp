@@ -273,7 +273,7 @@ void Game::addCommand(Action* action) {
 }
 
 void Game::addRoom(Room* room) {
-	rooms.push_back(*room);
+	rooms.push_back(room);
 }
 
 void Game::bindInterface(GameInterface* i) {
