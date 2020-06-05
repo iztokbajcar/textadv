@@ -5,23 +5,23 @@
 
 using namespace textadv;
 
-Item::Item(GameInterface i, std::string n, std::string loc, bool t) {
+Item::Item(GameInterface* i, std::string n, std::string loc, bool t) {
 	gameInterface = i;
 	name = n;
 	refName = n;
-	description = gameInterface.messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION];
-	descriptor = gameInterface.messages[GameInterface::MSG_DEFAULT_ITEM_LOCATOR];
+	description = gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION];
+	descriptor = gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_LOCATOR];
 	std::string prva = loc.substr(0, 1);
 	transform(prva.begin(), prva.end(), prva.begin(), ::toupper);
 	location = prva + loc.substr(1, loc.length() - 1);
 	takeable = t;
 }
 
-Item::Item(GameInterface i, std::string n, std::string loc, std::string desctor, bool t) {
+Item::Item(GameInterface* i, std::string n, std::string loc, std::string desctor, bool t) {
 	gameInterface = i;
 	name = n;
 	refName = n;
-	description = gameInterface.messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION];
+	description = gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION];
 	descriptor = desctor;
 	std::string prva = loc.substr(0, 1);
 	transform(prva.begin(), prva.end(), prva.begin(), ::toupper);

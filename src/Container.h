@@ -10,7 +10,7 @@ namespace textadv {
 		std::vector<Item> items;
 		bool open;
 	public:
-		Container(GameInterface i, std::string name, std::string loc, bool t);  // konstruktor
+		Container(GameInterface* i, std::string name, std::string loc, bool t);  // konstruktor
 		void addItem(Item item);
 		bool getOpen();
 		void setOpen(bool b);

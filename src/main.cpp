@@ -5,10 +5,10 @@
 #include "Item.h"
 #include "Room.h"
 
-#include <boost/archive/text_oarchive.hpp>
+/*#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <fstream>
-#include <iostream>
+#include <iostream>*/
 #include <string>
 
 using namespace textadv;
@@ -99,13 +99,6 @@ int main() {
 	game -> setDirection(GameInterface::DIR_WEST, "Z");
 	game -> setDirection(GameInterface::DIR_EAST, "V");
 
-	soba1 = new Room(gameInterface, "    ~~ Začetna soba ~~", "    To je začetna soba.");
-	soba2 = new Room(gameInterface, "    ~~ Druga soba ~~", "    Druga soba pač.");
-
-	game -> addRoom(soba1);
-	soba1 -> setExit(Room::W, soba2);
-	soba2 -> setExit(Room::E, soba1);
-
 	// Aliasi za ukaze
 	Action* actPomoc = new Action("POMOČ");  // POMOC
 	actPomoc -> setExecute(&pomoc);
@@ -146,6 +139,19 @@ int main() {
 	Action* actTest = new Action("test");
 	actTest -> setExecute(&test);
 	game -> addCommand(actTest);
+
+	// Igra
+
+	soba1 = new Room(gameInterface, "    ~~ Začetna soba ~~", "    To je začetna soba.");
+	soba2 = new Room(gameInterface, "    ~~ Druga soba ~~", "    Druga soba pač.");
+
+	Item* kljuc = new Item(gameInterface, "ključ", "na tleh", "leži", true);
+
+	soba1 -> addItem(kljuc);
+
+	game -> addRoom(soba1);
+	soba1 -> setExit(Room::W, soba2);
+	soba2 -> setExit(Room::E, soba1);
 
 	// Za debug
 	std::cout << "INTERFACE @ " << gameInterface << std::endl;

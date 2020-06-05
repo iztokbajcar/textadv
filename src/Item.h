@@ -8,7 +8,7 @@
 
 namespace textadv {
 	class Item {
-		GameInterface gameInterface;
+		GameInterface* gameInterface;
 		std::string name;  // ime predmeta
 		std::string refName;  // ime v tožilniku
 		std::string description;  // opis predmeta
@@ -18,8 +18,8 @@ namespace textadv {
 		std::vector<Action> actions;
 
 	public:
-		Item(GameInterface i, std::string n, std::string loc, bool t);
-		Item(GameInterface i, std::string n, std::string loc, std::string desctor, bool t);
+		Item(GameInterface* i, std::string n, std::string loc, bool t);
+		Item(GameInterface* i, std::string n, std::string loc, std::string desctor, bool t);
 		void addAction(Action action);
 		bool actionExists(std::string command);
 		Action getActionByCommand(std::string command);

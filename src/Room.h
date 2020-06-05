@@ -15,7 +15,7 @@ namespace textadv {
 	public:
 		std::string name;
 		std::string descr;
-		
+
 		Room* exit_n;
 		Room* exit_nw;
 		Room* exit_ne;
@@ -35,7 +35,7 @@ namespace textadv {
 		static const char E = 7;
 
 		Room(GameInterface* i, std::string n, std::string d);  // konstruktor
-		void addItem(Item i);
+		void addItem(Item* i);
 		std::string getDescr();
 		Item getItemByName(std::string name);
 		std::vector<Item> getItems();

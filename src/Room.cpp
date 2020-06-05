@@ -22,7 +22,7 @@ Room::Room(GameInterface* i, std::string n, std::string d) {  // konstruktor
 	exit_e = nullptr;
 }
 
-void Room::addItem(Item item) {items.push_back(item);}
+void Room::addItem(Item* item) {items.push_back(*item);}
 std::string Room::getDescr() {return descr;}
 
 Item Room::getItemByName(std::string name) {
