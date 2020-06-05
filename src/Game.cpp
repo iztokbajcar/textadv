@@ -20,7 +20,9 @@ void Game::onInventory() {
 	listInventory();
 }
 
-void Game::onExit() {}
+void Game::onExit() {
+	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_END]);
+}
 
 void Game::onHelp() {
 	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_HELP]);

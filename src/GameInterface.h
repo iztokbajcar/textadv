@@ -8,7 +8,7 @@ namespace textadv {
 	public:
 		std::string input = "";
 		std::string commands[14] = {"INV", "EXIT", "HELP", "LOOK", "TAKE", "N", "NW", "NE", "S", "SW", "SE", "W", "E", "EXAMINE"};
-		std::string messages[16] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "Tah item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific."};
+		std::string messages[16] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "That item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific."};
 		std::string directions[8] = {"N", "NW", "NE", "S", "SW", "SE", "W", "E"};
 
 		static const char COM_INV 		= 0;
