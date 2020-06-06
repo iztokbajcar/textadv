@@ -22,7 +22,7 @@ namespace textadv {
 		Item(GameInterface* i, std::string n, std::string loc, std::string desctor, bool t);
 		void addAction(Action action);
 		bool actionExists(std::string command);
-		Action getActionByCommand(std::string command);
+		Action* getActionByCommand(std::string command);
 		std::string getDescription();
 		std::string getName();
 		std::string getLoc();

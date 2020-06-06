@@ -359,18 +359,19 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 					std::string s2 = a.at(1);
 					transform(s1.begin(), s1.end(), s1.begin(), ::toupper);
 					transform(s2.begin(), s2.end(), s2.begin(), ::toupper);
-					if (s1 == s2) {
+					if (s1 == s2) {  // Našel predmet
 						i = &item;
 						break;
 					}
 				}
 				if (!i) {  // V sobi ni tega predmeta
 					gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
+					return false;
 				} else {
-                    Action aa = i -> getActionByCommand(comm);
-					action = &(aa);
+                    Action* aa = i -> getActionByCommand(comm);
+					action = aa;
 					if (action) {
-						(*action).execute();
+						action -> execute();
 					} else {
 						return predefinedComm(a);
 					}
@@ -436,7 +437,8 @@ void Game::start(Room* start) {
 }
 
 bool Game::predefinedComm(std::vector<std::string> a) {  // True, če je treba zapreti igro
-
+	for (std::string s : a) {
+	}
 	std::string comm = a.at(0);
 	transform(comm.begin(), comm.end(), comm.begin(), ::toupper);
 	if (comm == gameInterface -> commands[GameInterface::COM_INV]) {

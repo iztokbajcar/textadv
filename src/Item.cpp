@@ -44,11 +44,11 @@ bool Item::actionExists(std::string command) {
 	return rez;
 }
 
-Action Item::getActionByCommand(std::string command) {
-	Action rez("");
+Action* Item::getActionByCommand(std::string command) {
+	Action* rez = nullptr;
 	for (Action a : actions) {
 		if (command == a.getCommand()) {
-			rez = a;
+			rez = &a;
 			break;
 		}
 	}

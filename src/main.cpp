@@ -7,8 +7,8 @@
 
 /*#include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
-#include <fstream>
-#include <iostream>*/
+#include <fstream>*/
+#include <iostream>
 #include <string>
 
 using namespace textadv;
@@ -64,6 +64,8 @@ int main() {
 	game = new Game(gameInterface);
 	game -> setCommand(GameInterface::COM_EXIT, "IZHOD");
 	game -> setCommand(GameInterface::COM_HELP, "POMOC");
+	game -> setCommand(GameInterface::COM_LOOK, "POGLEJ");
+	game -> setCommand(GameInterface::COM_TAKE, "POBERI");
 	game -> setCommand(GameInterface::COM_NORTH, "S");
 	game -> setCommand(GameInterface::COM_NORTHWEST, "SZ");
 	game -> setCommand(GameInterface::COM_NORTHEAST, "SV");
@@ -163,7 +165,8 @@ int main() {
 
 	while (true) {
 		std::cout << "> ";
-		std::cin >> in;
+		std::getline(std::cin, in);
+		std::cout << in << std::endl;
 		bool exit = (game -> loop(&in));
 		if (exit) {
 			return 0;
