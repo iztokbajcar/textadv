@@ -91,6 +91,7 @@ int main() {
 	game -> setMessage(GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION, "Nič neobičajnega.");
 	game -> setMessage(GameInterface::MSG_ROOM_WITHOUT_EXIT, "Ta soba nima izhoda.");
 	game -> setMessage(GameInterface::MSG_TOO_FEW_PARAMETERS, "Prosim opiši bolj natančno.");
+	game -> setMessage(GameInterface::MSG_INVENTORY_CONTENTS, "Inventar:");
 
 	game -> setDirection(GameInterface::DIR_NORTH, "S");
 	game -> setDirection(GameInterface::DIR_NORTHWEST, "SZ");

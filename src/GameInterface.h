@@ -8,7 +8,7 @@ namespace textadv {
 	public:
 		std::string input = "";
 		std::string commands[14] = {"INV", "EXIT", "HELP", "LOOK", "TAKE", "N", "NW", "NE", "S", "SW", "SE", "W", "E", "EXAMINE"};
-		std::string messages[16] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "That item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific."};
+		std::string messages[17] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "That item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific.", "Inventory contents:"};
 		std::string directions[8] = {"N", "NW", "NE", "S", "SW", "SE", "W", "E"};
 
 		static const char COM_INV 		= 0;
@@ -42,6 +42,7 @@ namespace textadv {
 		static const char MSG_DEFAULT_ITEM_DESCRIPTION 	= 13;
 		static const char MSG_ROOM_WITHOUT_EXIT 		= 14;
 		static const char MSG_TOO_FEW_PARAMETERS 		= 15;
+		static const char MSG_INVENTORY_CONTENTS		= 16;
 
 		static const char DIR_NORTH 		= 0;
 		static const char DIR_NORTHWEST		= 1;

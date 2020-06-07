@@ -297,6 +297,7 @@ void Game::listInventory() {
 	if (inventory.empty()) {
 		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_INVENTORY_EMPTY]);
 	} else {
+		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_INVENTORY_CONTENTS]);
 		for (int i = 0; i < inventory.size(); i++) {
 			gameInterface -> out(" - " + inventory.at(i).getName());
 		}
@@ -387,16 +388,15 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 
 void Game::take(std::string s) {
 	bool aliObstaja = false;
-	for (int i = 0; i < (*currentRoom).getItems().size(); i++) {
-		std::string name = (*currentRoom).getItems().at(i).getRefName();
+	for (int i = 0; i < currentRoom -> getItems().size(); i++) {
+		std::string name = currentRoom -> getItems().at(i).getRefName();
 		transform(name.begin(), name.end(), name.begin(), ::toupper);
 		if (name.substr(0, name.length() - 1) == s.substr(0, s.length() - 1)) {
 			aliObstaja = true;
-			if (!(*currentRoom).getItems().at(i).isTakeable()) {
+			if (!currentRoom -> getItems().at(i).isTakeable()) {
 				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
 			} else {
-				inventory.push_back((*currentRoom).getItems().at(i));
-				inventory.erase(inventory.begin() + i);
+				inventory.push_back(currentRoom -> getItems().at(i));
 				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
 				break;
 			}
