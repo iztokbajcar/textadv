@@ -9,7 +9,7 @@ namespace textadv {
 	class Room {
 		GameInterface gameInterface;
 		Item* key;
-		std::vector<Item> items;
+		std::vector<Item*> items;
 		std::string lockedMessage;
 
 	public:
@@ -38,12 +38,13 @@ namespace textadv {
 		void addItem(Item* i);
 		std::string getDescr();
 		Item getItemByName(std::string name);
-		std::vector<Item> getItems();
+		std::vector<Item*>* getItems();
 		Item* getKey();
 		std::string getLockedMessage();
 		std::string getName();
 		void listExits();
 		void listItems();
+		void lock(Item* i);
 		void lock(Item* i, std::string message);
 		void setDescr(std::string d);
 		void setExit(char dir, Room* room);

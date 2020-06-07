@@ -52,18 +52,9 @@ void Game::onMoveEast() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_e -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_e;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_e);
@@ -80,18 +71,9 @@ void Game::onMoveNorth() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_n -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_n;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_n);
@@ -108,18 +90,9 @@ void Game::onMoveNortheast() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_ne -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_ne;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_ne);
@@ -136,18 +109,9 @@ void Game::onMoveNorthwest() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_nw -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_nw;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_nw);
@@ -164,18 +128,9 @@ void Game::onMoveSouth() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_s -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_s;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_s);
@@ -192,18 +147,9 @@ void Game::onMoveSoutheast() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_se -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_se;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_se);
@@ -220,18 +166,9 @@ void Game::onMoveSouthwest() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
+		if (!(currentRoom -> exit_sw -> getKey())) imaKljuc = true;
 		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_sw;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
-			}
+
 		}
 		if (imaKljuc) {
 			currentRoom = &(*(*currentRoom).exit_sw);
@@ -248,17 +185,11 @@ void Game::onMoveWest() {
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
-		if (!(currentRoom -> getKey())) imaKljuc = true;
-		if (!imaKljuc) {
-			for (int i = 0; i < inventory.size(); i++) {
-				Item* i1 = &(inventory.at(i));
-				Room* r = currentRoom -> exit_w;
-				Item* ii = r -> getKey();
-				Item* i2 = ii;
-				if (i1 == i2) {
-					imaKljuc = true;
-					break;
-				}
+		Item* key = currentRoom -> exit_w -> getKey();  // predmet (ključ), ki odklene sobo
+		if (!key) imaKljuc = true;
+		if (!imaKljuc) {  // Če je soba zaklenjena
+			if (isInInventory(key)) {
+				imaKljuc = true;
 			}
 		}
 		if (imaKljuc) {
@@ -282,10 +213,10 @@ void Game::bindInterface(GameInterface* i) {
 	gameInterface = i;
 }
 
-bool Game::isInInventory(Item i) {
-	Item* i1 = &i;
+bool Game::isInInventory(Item* i) {
+	Item* i1 = i;
 	for (int i = 0; i < inventory.size(); i++) {
-		Item* i2 = &(inventory.at(i));
+		Item* i2 = inventory.at(i);
 		if (i1 == i2) {
 			return true;
 		}
@@ -299,7 +230,7 @@ void Game::listInventory() {
 	} else {
 		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_INVENTORY_CONTENTS]);
 		for (int i = 0; i < inventory.size(); i++) {
-			gameInterface -> out(" - " + inventory.at(i).getName());
+			gameInterface -> out(" - " + inventory.at(i) -> getName());
 		}
 	}
 }
@@ -312,9 +243,9 @@ void Game::look() {
 	gameInterface -> out("");
 	currentRoom -> listItems();
 	currentRoom -> listExits();
-	int l = (*currentRoom).getItems().size();
+	int l = currentRoom -> getItems() -> size();
 	for (int i = 0; i < l; i++) {
-		Item item = (currentRoom -> getItems()).at(i);
+		Item* item = currentRoom -> getItems() -> at(i);
 		/*if (Container* dynamic_cast<Container>(Item)) {  // Izbrani predmet je tipa Container
 
 		}*/
@@ -355,13 +286,13 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 			if (a.size() > 1) {
 				// Preveri za dejanja na predmetu v sobi
 				Item* i = nullptr;
-				for (Item item : (*currentRoom).getItems()) {
-					std::string s1 = item.getRefName();
+				for (Item* item : *(currentRoom -> getItems())) {
+					std::string s1 = item -> getRefName();
 					std::string s2 = a.at(1);
 					transform(s1.begin(), s1.end(), s1.begin(), ::toupper);
 					transform(s2.begin(), s2.end(), s2.begin(), ::toupper);
 					if (s1 == s2) {  // Našel predmet
-						i = &item;
+						i = item;
 						break;
 					}
 				}
@@ -388,15 +319,20 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 
 void Game::take(std::string s) {
 	bool aliObstaja = false;
-	for (int i = 0; i < currentRoom -> getItems().size(); i++) {
-		std::string name = currentRoom -> getItems().at(i).getRefName();
+	for (int i = 0; i < currentRoom -> getItems() -> size(); i++) {
+		std::string name = currentRoom -> getItems() -> at(i) -> getRefName();
 		transform(name.begin(), name.end(), name.begin(), ::toupper);
 		if (name.substr(0, name.length() - 1) == s.substr(0, s.length() - 1)) {
 			aliObstaja = true;
-			if (!currentRoom -> getItems().at(i).isTakeable()) {
+			if (!currentRoom -> getItems() -> at(i) -> isTakeable()) {
 				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
 			} else {
-				inventory.push_back(currentRoom -> getItems().at(i));
+				inventory.push_back(currentRoom -> getItems() -> at(i));
+
+				// Izbriše predmet iz sobe
+				delete(currentRoom -> getItems() -> at(i));
+				currentRoom -> getItems() -> erase(currentRoom -> getItems() -> begin() + i);
+
 				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
 				break;
 			}

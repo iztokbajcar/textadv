@@ -77,7 +77,7 @@ int main() {
 
 	game -> setMessage(GameInterface::MSG_START, "########\n# IGRA #\n########");
 	game -> setMessage(GameInterface::MSG_END, "Nasvidenje!");
-	game -> setMessage(GameInterface::MSG_NO_EXIT, "V to smer ne moreš.");
+	game -> setMessage(GameInterface::MSG_NO_EXIT, "V to smer ne morem.");
 	game -> setMessage(GameInterface::MSG_INVENTORY_EMPTY, "Inventar je prazen.");
 	game -> setMessage(GameInterface::MSG_ITEM_UNKNOWN, "Ne vidim tega predmeta.");
 	game -> setMessage(GameInterface::MSG_ITEM_TAKEN, "Pobrano.");
@@ -108,8 +108,8 @@ int main() {
 	game -> addCommand(actPomoc);
 
 	Action* actSever = new Action("SEVER");  // S
-	actPomoc -> setExecute(&pomoc);
-	game -> addCommand(actPomoc);
+	actSever -> setExecute(&sever);
+	game -> addCommand(actSever);
 
 	Action* actSZ = new Action("SEVEROZAHOD");  // SZ
 	actSZ -> setExecute(&severozahod);
@@ -151,6 +151,7 @@ int main() {
 	Item* kljuc = new Item(gameInterface, "ključ", "na tleh", "leži", true);
 
 	soba1 -> addItem(kljuc);
+	soba2 -> lock(kljuc);
 
 	game -> addRoom(soba1);
 	soba1 -> setExit(Room::W, soba2);

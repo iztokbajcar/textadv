@@ -16,7 +16,7 @@ namespace textadv {
 
 		GameInterface* gameInterface;
 		std::vector<Room*> rooms;
-		std::vector<Item> inventory;
+		std::vector<Item*> inventory;
 		Room* startingRoom = nullptr;
 		Room* currentRoom = nullptr;
 		std::string prompt = "> ";
@@ -40,7 +40,7 @@ namespace textadv {
 		void addCommand(Action* action);
 		void addRoom(Room* room);
 		void bindInterface(GameInterface* i);
-		bool isInInventory(Item item);
+		bool isInInventory(Item* item);
 		void listInventory();
 		void look();
 		bool loop(std::string* s);

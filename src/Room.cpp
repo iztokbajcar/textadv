@@ -22,24 +22,24 @@ Room::Room(GameInterface* i, std::string n, std::string d) {  // konstruktor
 	exit_e = nullptr;
 }
 
-void Room::addItem(Item* item) {items.push_back(*item);}
+void Room::addItem(Item* item) {items.push_back(item);}
 std::string Room::getDescr() {return descr;}
 
 Item Room::getItemByName(std::string name) {
 	transform(name.begin(), name.end(), name.begin(), ::toupper);
 	Item* rez = nullptr;
-	for (Item i : items) {
+	for (Item* i : items) {
 		std::string n;
 		transform(n.begin(), n.end(), n.begin(), ::toupper);
 		if (name == n) {
-			rez = &i;
+			rez = i;
 			break;
 		}
 		return *rez;
 	}
 }
 
-std::vector<Item> Room::getItems() {return items;}
+std::vector<Item*>* Room::getItems() {return &items;}
 Item* Room::getKey() {return key;}
 std::string Room::getLockedMessage() {return lockedMessage;}
 std::string Room::getName() {return name;}
@@ -66,9 +66,13 @@ void Room::listItems() {
 		gameInterface.out(gameInterface.messages[GameInterface::MSG_NO_ITEMS_IN_ROOM]);
 	} else {
 		for (int i = 0; i < items.size(); i++) {
-			gameInterface.out(items.at(i).getLoc() + " " + items.at(i).getLocDescriptor() + " " + items.at(i).getName() + ".");
+			gameInterface.out(items.at(i) -> getLoc() + " " + items.at(i) -> getLocDescriptor() + " " + items.at(i) -> getName() + ".");
 		}
 	}
+}
+
+void Room::lock(Item* k) {
+	key = k;
 }
 
 void Room::lock(Item* k, std::string message) {
