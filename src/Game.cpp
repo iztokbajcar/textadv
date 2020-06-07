@@ -437,8 +437,6 @@ void Game::start(Room* start) {
 }
 
 bool Game::predefinedComm(std::vector<std::string> a) {  // True, če je treba zapreti igro
-	for (std::string s : a) {
-	}
 	std::string comm = a.at(0);
 	transform(comm.begin(), comm.end(), comm.begin(), ::toupper);
 	if (comm == gameInterface -> commands[GameInterface::COM_INV]) {
