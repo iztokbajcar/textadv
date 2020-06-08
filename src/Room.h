@@ -37,7 +37,8 @@ namespace textadv {
 		Room(GameInterface* i, std::string n, std::string d);  // konstruktor
 		void addItem(Item* i);
 		std::string getDescr();
-		Item getItemByName(std::string name);
+		Item* getItemByName(std::string name);
+		Item* getItemByRefName(std::string refName);
 		std::vector<Item*>* getItems();
 		Item* getKey();
 		std::string getLockedMessage();

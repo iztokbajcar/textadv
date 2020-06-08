@@ -7,8 +7,8 @@ namespace textadv {
 	class GameInterface {
 	public:
 		std::string input = "";
-		std::string commands[14] = {"INV", "EXIT", "HELP", "LOOK", "TAKE", "N", "NW", "NE", "S", "SW", "SE", "W", "E", "EXAMINE"};
-		std::string messages[17] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "That item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific.", "Inventory contents:"};
+		std::string commands[16] = {"INV", "EXIT", "HELP", "LOOK", "TAKE", "N", "NW", "NE", "S", "SW", "SE", "W", "E", "EXAMINE", "OPEN", "CLOSE"};
+		std::string messages[23] = {"Welcome!", "Goodbye!", "You cannot go that way.", "The inventory is empty.", "Item unknown.", "Taken.", "That item is not takeable.", "That room is locked.", "I don't know how to do that.", "HELP:\nTODO", "Possible directions: ", "There are no items in this room.", "is", "Nothing out of the ordinary.", "There is no way out of this room.", "Please be more specific.", "Inventory contents:", "It is now open.", "It is now closed.", "It is already open.", "It is already closed.", "Cannot open.", "Cannot close."};
 		std::string directions[8] = {"N", "NW", "NE", "S", "SW", "SE", "W", "E"};
 
 		static const char COM_INV 		= 0;
@@ -25,6 +25,8 @@ namespace textadv {
 		static const char COM_WEST 		= 11;
 		static const char COM_EAST 		= 12;
 		static const char COM_EXAMINE 	= 13;
+		static const char COM_OPEN		= 14;
+		static const char COM_CLOSE		= 15;
 
 		static const char MSG_START 					= 0;
 		static const char MSG_END 						= 1;
@@ -43,6 +45,12 @@ namespace textadv {
 		static const char MSG_ROOM_WITHOUT_EXIT 		= 14;
 		static const char MSG_TOO_FEW_PARAMETERS 		= 15;
 		static const char MSG_INVENTORY_CONTENTS		= 16;
+		static const char MSG_DEFAULT_CONTAINER_OPEN	= 17;
+		static const char MSG_DEFAULT_CONTAINER_CLOSE	= 18;
+		static const char MSG_ALREADY_OPEN				= 19;
+		static const char MSG_ALREADY_CLOSED			= 20;
+		static const char MSG_CANNOT_OPEN				= 21;
+		static const char MSG_CANNOT_CLOSE				= 22;
 
 		static const char DIR_NORTH 		= 0;
 		static const char DIR_NORTHWEST		= 1;

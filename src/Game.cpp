@@ -13,7 +13,7 @@ Game::Game(GameInterface* i) {
 //Game::~Game() {}
 
 void Game::onCommandUnknown() {
-	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_COMMAND_UNKNOWN]);
+	gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_COMMAND_UNKNOWN]);
 }
 
 void Game::onInventory() {
@@ -21,11 +21,11 @@ void Game::onInventory() {
 }
 
 void Game::onExit() {
-	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_END]);
+	gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_END]);
 }
 
 void Game::onHelp() {
-	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_HELP]);
+	gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_HELP]);
 }
 
 void Game::onLook() {
@@ -33,12 +33,11 @@ void Game::onLook() {
 }
 
 void Game::onExamine(std::string s) {
-    Item i1 = currentRoom -> getItemByName(s);
-	Item* i = &i1;
+    Item* i = currentRoom -> getItemByName(s);
 	if (i) {  // Če ni nullptr
-		gameInterface -> out(i -> getDescription());
+		gameInterface -> out("    " + i -> getDescription());
 	} else {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION]);
 	}
 }
 
@@ -48,7 +47,7 @@ void Game::onTake(std::string s) {
 
 void Game::onMoveEast() {
 	if (!(*currentRoom).exit_e) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -60,14 +59,14 @@ void Game::onMoveEast() {
 			currentRoom = &(*(*currentRoom).exit_e);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_e).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_e).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveNorth() {
 	if (!(*currentRoom).exit_n) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -79,14 +78,14 @@ void Game::onMoveNorth() {
 			currentRoom = &(*(*currentRoom).exit_n);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_n).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_n).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveNortheast() {
 	if (!(*currentRoom).exit_ne) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -98,14 +97,14 @@ void Game::onMoveNortheast() {
 			currentRoom = &(*(*currentRoom).exit_ne);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_ne).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_ne).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveNorthwest() {
 	if (!(*currentRoom).exit_nw) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -117,14 +116,14 @@ void Game::onMoveNorthwest() {
 			currentRoom = &(*(*currentRoom).exit_nw);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_nw).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_nw).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveSouth() {
 	if (!(*currentRoom).exit_s) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -136,14 +135,14 @@ void Game::onMoveSouth() {
 			currentRoom = &(*(*currentRoom).exit_s);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_s).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_s).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveSoutheast() {
 	if (!(*currentRoom).exit_se) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -155,14 +154,14 @@ void Game::onMoveSoutheast() {
 			currentRoom = &(*(*currentRoom).exit_se);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_se).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_se).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveSouthwest() {
 	if (!(*currentRoom).exit_sw) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -174,14 +173,14 @@ void Game::onMoveSouthwest() {
 			currentRoom = &(*(*currentRoom).exit_sw);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_sw).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_sw).getLockedMessage());
 		}
 	}
 }
 
 void Game::onMoveWest() {
 	if (!(*currentRoom).exit_w) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_NO_EXIT]);
 	} else {
 		// Preveri, ali igralec ima ključ
 		bool imaKljuc = false;
@@ -196,7 +195,39 @@ void Game::onMoveWest() {
 			currentRoom = &(*(*currentRoom).exit_w);
 			look();
 		} else {
-			gameInterface -> out((*(*currentRoom).exit_w).getLockedMessage());
+			gameInterface -> out("    " + (*(*currentRoom).exit_w).getLockedMessage());
+		}
+	}
+}
+
+void Game::onOpen(std::string s) {
+	// Preveri, ali je iskani predmet v sobi
+	Item* i = currentRoom -> getItemByRefName(s);
+	Container* c = dynamic_cast<Container*> (i);
+	if (c == nullptr) {  // i ni Container
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_CANNOT_OPEN]);
+	} else {  // i je Container
+		if (c -> getOpen()) {  // je že odprto
+			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ALREADY_OPEN]);
+		} else {
+			c -> setOpen(true);
+			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_CONTAINER_OPEN]);
+		}
+	}
+}
+
+void Game::onClose(std::string s) {
+	// Preveri, ali je iskani predmet v sobi
+	Item* i = currentRoom -> getItemByRefName(s);
+	Container* c = dynamic_cast<Container*> (i);
+	if (c == nullptr) {  // i ni Container
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_CANNOT_CLOSE]);
+	} else {  // i je Container
+		if (!(c -> getOpen())) {  // je že zaprto
+			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ALREADY_CLOSED]);
+		} else {
+			c -> setOpen(false);
+			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_CONTAINER_CLOSE]);
 		}
 	}
 }
@@ -226,11 +257,11 @@ bool Game::isInInventory(Item* i) {
 
 void Game::listInventory() {
 	if (inventory.empty()) {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_INVENTORY_EMPTY]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_INVENTORY_EMPTY]);
 	} else {
-		gameInterface -> out(gameInterface -> messages[GameInterface::MSG_INVENTORY_CONTENTS]);
+		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_INVENTORY_CONTENTS]);
 		for (int i = 0; i < inventory.size(); i++) {
-			gameInterface -> out(" - " + inventory.at(i) -> getName());
+			gameInterface -> out("     - " + inventory.at(i) -> getName());
 		}
 	}
 }
@@ -238,8 +269,9 @@ void Game::listInventory() {
 void Game::look() {
 	std::string n = (*currentRoom).getName();
 	transform(n.begin(), n.end(), n.begin(), ::toupper);
-	gameInterface -> out(n);
-	gameInterface -> out(currentRoom -> getDescr());
+	gameInterface -> out("");
+	gameInterface -> out("    " + n);
+	gameInterface -> out("    " + currentRoom -> getDescr());
 	gameInterface -> out("");
 	currentRoom -> listItems();
 	currentRoom -> listExits();
@@ -250,13 +282,13 @@ void Game::look() {
 
 		}*/
 	}
+	gameInterface -> out("");
 }
 
 bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 	std::string s = *input;
 	transform(s.begin(), s.end(), s.begin(), ::toupper);
 	if (s.length() > 0) {
-		gameInterface -> out("");
 		//std::string s = gameInterface -> input;
 
 		// Razdeli s po presledkih v a
@@ -325,7 +357,7 @@ void Game::take(std::string s) {
 		if (name.substr(0, name.length() - 1) == s.substr(0, s.length() - 1)) {
 			aliObstaja = true;
 			if (!currentRoom -> getItems() -> at(i) -> isTakeable()) {
-				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
+				gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
 			} else {
 				inventory.push_back(currentRoom -> getItems() -> at(i));
 
@@ -333,7 +365,7 @@ void Game::take(std::string s) {
 				delete(currentRoom -> getItems() -> at(i));
 				currentRoom -> getItems() -> erase(currentRoom -> getItems() -> begin() + i);
 
-				gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
+				gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
 				break;
 			}
 		}
@@ -389,11 +421,12 @@ bool Game::predefinedComm(std::vector<std::string> a) {  // True, če je treba z
 		return false;
 	} else if (comm == gameInterface -> commands[GameInterface::COM_EXAMINE]) {
 		onExamine(a.at(1));
+		return false;
 	} else if (comm == gameInterface -> commands[GameInterface::COM_TAKE]) {
 		if (a.size() > 1) {
 			onTake(a.at(1));
 		} else {
-			gameInterface -> out(gameInterface -> messages[GameInterface::MSG_TOO_FEW_PARAMETERS]);
+			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_TOO_FEW_PARAMETERS]);
 		}
 		return false;
 	} else if (comm == gameInterface -> commands[GameInterface::COM_NORTH]) {
@@ -420,6 +453,14 @@ bool Game::predefinedComm(std::vector<std::string> a) {  // True, če je treba z
 	} else if (comm == gameInterface -> commands[GameInterface::COM_EAST]) {
 		onMoveEast();
 		return false;
+	} else if (a.size() > 1) {
+		if (comm == gameInterface -> commands[GameInterface::COM_OPEN]) {
+			onOpen(a.at(1));
+			return false;
+		} else if (comm == gameInterface -> commands[GameInterface::COM_CLOSE]) {
+			onClose(a.at(1));
+			return false;
+		}
 	} else {
 		onCommandUnknown();
 		return false;

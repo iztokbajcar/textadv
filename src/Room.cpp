@@ -25,18 +25,32 @@ Room::Room(GameInterface* i, std::string n, std::string d) {  // konstruktor
 void Room::addItem(Item* item) {items.push_back(item);}
 std::string Room::getDescr() {return descr;}
 
-Item Room::getItemByName(std::string name) {
+Item* Room::getItemByName(std::string name) {
 	transform(name.begin(), name.end(), name.begin(), ::toupper);
 	Item* rez = nullptr;
 	for (Item* i : items) {
-		std::string n;
+		std::string n = i -> getName();
 		transform(n.begin(), n.end(), n.begin(), ::toupper);
 		if (name == n) {
 			rez = i;
 			break;
 		}
-		return *rez;
 	}
+	return rez;
+}
+
+Item* Room::getItemByRefName(std::string refName) {
+	transform(refName.begin(), refName.end(), refName.begin(), ::toupper);
+	Item* rez = nullptr;
+	for (Item* i : items) {
+		std::string n = i -> getRefName();
+		transform(n.begin(), n.end(), n.begin(), ::toupper);
+		if (refName == n) {
+			rez = i;
+			break;
+		}
+	}
+	return rez;
 }
 
 std::vector<Item*>* Room::getItems() {return &items;}
@@ -55,18 +69,18 @@ void Room::listExits() {
 	if (exit_w ) {if (s.length() > 0) {s += ", ";} s += gameInterface.directions[GameInterface::DIR_WEST];}
 	if (exit_e ) {if (s.length() > 0) {s += ", ";} s += gameInterface.directions[GameInterface::DIR_EAST];}
 	if (s.length() > 0) {
-		gameInterface.out(gameInterface.messages[GameInterface::MSG_DIRS] + s);
+		gameInterface.out("    " + gameInterface.messages[GameInterface::MSG_DIRS] + s);
 	} else {
-		gameInterface.out(gameInterface.messages[GameInterface::MSG_ROOM_WITHOUT_EXIT]);
+		gameInterface.out("    " + gameInterface.messages[GameInterface::MSG_ROOM_WITHOUT_EXIT]);
 	}
 }
 
 void Room::listItems() {
 	if (items.empty()) {
-		gameInterface.out(gameInterface.messages[GameInterface::MSG_NO_ITEMS_IN_ROOM]);
+		gameInterface.out("    " + gameInterface.messages[GameInterface::MSG_NO_ITEMS_IN_ROOM]);
 	} else {
 		for (int i = 0; i < items.size(); i++) {
-			gameInterface.out(items.at(i) -> getLoc() + " " + items.at(i) -> getLocDescriptor() + " " + items.at(i) -> getName() + ".");
+			gameInterface.out("    " + items.at(i) -> getLoc() + " " + items.at(i) -> getLocDescriptor() + " " + items.at(i) -> getName() + ".");
 		}
 	}
 }

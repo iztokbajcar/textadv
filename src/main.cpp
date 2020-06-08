@@ -74,6 +74,9 @@ int main() {
 	game -> setCommand(GameInterface::COM_SOUTHEAST, "JV");
 	game -> setCommand(GameInterface::COM_WEST, "Z");
 	game -> setCommand(GameInterface::COM_EAST, "V");
+	game -> setCommand(GameInterface::COM_EXAMINE, "PREGLEJ");
+	game -> setCommand(GameInterface::COM_OPEN, "ODPRI");
+	game -> setCommand(GameInterface::COM_CLOSE, "ZAPRI");
 
 	game -> setMessage(GameInterface::MSG_START, "########\n# IGRA #\n########");
 	game -> setMessage(GameInterface::MSG_END, "Nasvidenje!");
@@ -84,7 +87,26 @@ int main() {
 	game -> setMessage(GameInterface::MSG_ITEM_NOT_TAKEABLE, "Tega predmeta ne morem pobrati.");
 	game -> setMessage(GameInterface::MSG_ROOM_LOCKED, "Ta soba je zaklenjena.");
 	game -> setMessage(GameInterface::MSG_COMMAND_UNKNOWN, "Žal ne poznam tega ukaza.");
-	game -> setMessage(GameInterface::MSG_HELP, "~~~~~~~~~\n~ POMOČ ~\n~       ~\n~~~~~~~~~");
+	game -> setMessage(GameInterface::MSG_HELP,
+		"###############################\n"
+		"#            POMOČ            #\n"
+		"###############################\n"
+		"# IZHOD - konča igro          #\n"
+		"# POMOC - prikaže pomoč       #\n"
+		"# POGLEJ - opiše sobo         #\n"
+		"# POBERI p - pobere predmet p #\n"
+		"# PREGLEJ p - opiše predmet p #\n"
+		"# INV - prikaže inventar      #\n"
+		"# S - premik na sever         #\n"
+		"# J - premik na jug           #\n"
+		"# V - premik na vzhod         #\n"
+		"# Z - premik na zahod         #\n"
+		"# SV - premik na severovzhod  #\n"
+		"# SZ - premik na severozahod  #\n"
+		"# JV - premik na jugovzhod    #\n"
+		"# JZ - premik na jugozahod    #\n"
+		"###############################"
+	);
 	game -> setMessage(GameInterface::MSG_DIRS, "Izhodi: ");
 	game -> setMessage(GameInterface::MSG_NO_ITEMS_IN_ROOM, "V tej sobi ni predmetov.");
 	game -> setMessage(GameInterface::MSG_DEFAULT_ITEM_LOCATOR, "se nahaja");
@@ -92,6 +114,12 @@ int main() {
 	game -> setMessage(GameInterface::MSG_ROOM_WITHOUT_EXIT, "Ta soba nima izhoda.");
 	game -> setMessage(GameInterface::MSG_TOO_FEW_PARAMETERS, "Prosim opiši bolj natančno.");
 	game -> setMessage(GameInterface::MSG_INVENTORY_CONTENTS, "Inventar:");
+	game -> setMessage(GameInterface::MSG_DEFAULT_CONTAINER_OPEN, "Odprto.");
+	game -> setMessage(GameInterface::MSG_DEFAULT_CONTAINER_CLOSE, "Zaprto.");
+	game -> setMessage(GameInterface::MSG_ALREADY_OPEN, "Je že bilo odprto.");
+	game -> setMessage(GameInterface::MSG_ALREADY_CLOSED, "Je že bilo zaprto.");
+	game -> setMessage(GameInterface::MSG_CANNOT_OPEN, "Ne morem odpreti.");
+	game -> setMessage(GameInterface::MSG_CANNOT_CLOSE, "Ne morem zapreti.");
 
 	game -> setDirection(GameInterface::DIR_NORTH, "S");
 	game -> setDirection(GameInterface::DIR_NORTHWEST, "SZ");
@@ -145,12 +173,15 @@ int main() {
 
 	// Igra
 
-	soba1 = new Room(gameInterface, "    ~~ Začetna soba ~~", "    To je začetna soba.");
-	soba2 = new Room(gameInterface, "    ~~ Druga soba ~~", "    Druga soba pač.");
+	soba1 = new Room(gameInterface, "~~ Začetna soba ~~", "To je začetna soba.");
+	soba2 = new Room(gameInterface, "~~ Druga soba ~~", "Druga soba pač.");
 
 	Item* kljuc = new Item(gameInterface, "ključ", "na tleh", "leži", true);
+	Container* omara = new Container(gameInterface, "omara", "v kotu", "stoji", false);
+	omara -> setRefName("omaro");
 
 	soba1 -> addItem(kljuc);
+	soba1 -> addItem(omara);
 	soba2 -> lock(kljuc);
 
 	game -> addRoom(soba1);
@@ -168,7 +199,6 @@ int main() {
 	while (true) {
 		std::cout << "> ";
 		std::getline(std::cin, in);
-		std::cout << in << std::endl;
 		bool exit = (game -> loop(&in));
 		if (exit) {
 			return 0;

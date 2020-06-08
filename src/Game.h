@@ -37,6 +37,8 @@ namespace textadv {
 		void onMoveSoutheast();
 		void onMoveSouthwest();
 		void onMoveWest();
+		void onOpen(std::string s);
+		void onClose(std::string s);
 		void addCommand(Action* action);
 		void addRoom(Room* room);
 		void bindInterface(GameInterface* i);

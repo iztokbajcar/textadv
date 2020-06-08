@@ -20,6 +20,7 @@ namespace textadv {
 	public:
 		Item(GameInterface* i, std::string n, std::string loc, bool t);
 		Item(GameInterface* i, std::string n, std::string loc, std::string desctor, bool t);
+		virtual ~Item() = default;  // destruktor
 		void addAction(Action action);
 		bool actionExists(std::string command);
 		Action* getActionByCommand(std::string command);
