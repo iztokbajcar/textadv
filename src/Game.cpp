@@ -255,6 +255,10 @@ bool Game::isInInventory(Item* i) {
 	return false;
 }
 
+std::vector<Item*>* Game::getInventory() {
+	return &inventory;
+}
+
 void Game::listInventory() {
 	if (inventory.empty()) {
 		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_INVENTORY_EMPTY]);
@@ -329,10 +333,26 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 					}
 				}
 				if (!i) {  // V sobi ni tega predmeta
-					gameInterface -> out(gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
-					return false;
-				} else {
-                    Action* aa = i -> getActionByCommand(comm);
+					// Preveri za dejanja na predmetu v inventarju
+					Item* j = nullptr;
+					for (Item* item : *getInventory()) {
+						std::string s1 = item -> getRefName();
+						std::string s2 = a.at(1);
+						transform(s1.begin(), s1.end(), s1.begin(), ::toupper);
+						transform(s2.begin(), s2.end(), s2.begin(), ::toupper);
+						if (s1 == s2) {  // Našel predmet
+							j = item;
+							break;
+						}
+					}
+					if (!j) {
+						gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
+					} else {
+	                    i = j;
+					}
+				}
+				if (i) {
+					Action* aa = i -> getActionByCommand(comm);
 					action = aa;
 					if (action) {
 						action -> execute();

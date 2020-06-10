@@ -42,6 +42,7 @@ namespace textadv {
 		void addCommand(Action* action);
 		void addRoom(Room* room);
 		void bindInterface(GameInterface* i);
+		std::vector<Item*>* getInventory();
 		bool isInInventory(Item* item);
 		void listInventory();
 		void look();
