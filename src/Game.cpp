@@ -212,6 +212,9 @@ void Game::onOpen(std::string s) {
 		} else {
 			c -> setOpen(true);
 			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_CONTAINER_OPEN]);
+			if (c -> getOnOpen() != nullptr) {  // Če je določena, izvede funkcijo ob odprtju
+				(c -> getOnOpen())();
+			}
 		}
 	}
 }
@@ -228,6 +231,9 @@ void Game::onClose(std::string s) {
 		} else {
 			c -> setOpen(false);
 			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_CONTAINER_CLOSE]);
+			if (c -> getOnClose() != nullptr) {  // Če je določena, izvede funkcijo ob zaprtju
+				(c -> getOnClose())();
+			}
 		}
 	}
 }

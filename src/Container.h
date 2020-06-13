@@ -11,6 +11,8 @@ namespace textadv {
 		bool open = false;
 		std::string openMessage;
 		std::string closeMessage;
+		void (*o)() = nullptr;
+		void (*c)() = nullptr;
 	public:
 		Container(GameInterface* i, std::string name, std::string loc, bool t);  // konstruktor
 		Container(GameInterface* i, std::string name, std::string loc, std::string desctor, bool t);  // konstruktor
@@ -21,6 +23,8 @@ namespace textadv {
 		void setCloseMessage(std::string s);
 		void setOnOpen(void (*open)());
 		void setOnClose(void (*close)());
+		void (*getOnOpen())();
+		void (*getOnClose())();
 	};
 }
 

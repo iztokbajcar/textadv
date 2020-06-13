@@ -57,6 +57,7 @@ void zahod() 		{game -> onMoveWest();}
 void vzhod() 		{game -> onMoveEast();}
 
 void test() {std::cout << "Test." << std::endl;}
+void omaraOpen() {std::cout << "    Ko odpreš omaro, ugotoviš, da je prazna." << std::endl;}
 
 int main() {
 	gameInterface = new GameInterface();
@@ -179,6 +180,8 @@ int main() {
 	Item* kljuc = new Item(gameInterface, "ključ", "na tleh", "leži", true);
 	Container* omara = new Container(gameInterface, "omara", "v kotu", "stoji", false);
 	omara -> setRefName("omaro");
+	omara -> setOnOpen(&omaraOpen);
+	std::cout << omara -> getOnOpen() << std::endl;
 
 	soba1 -> addItem(kljuc);
 	soba1 -> addItem(omara);

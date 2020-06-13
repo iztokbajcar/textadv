@@ -19,5 +19,11 @@ void Container::addItem(Item item) {
 bool Container::getOpen() {return open;}
 void Container::setOpen(bool b) {open = b;}
 
+void Container::setOnOpen(void (*open)()) {o = open;}
+void Container::setOnClose(void (*close)()) {c = close;}
+
+void (*Container::getOnOpen())() {return o;}
+void (*Container::getOnClose())() {return c;}
+
 void Container::setOpenMessage(std::string s) {openMessage = s;}
 void Container::setCloseMessage(std::string s) {closeMessage = s;}
