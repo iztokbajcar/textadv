@@ -25,7 +25,7 @@ void Game::onExit() {
 }
 
 void Game::onHelp() {
-	gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_HELP]);
+	gameInterface -> out(gameInterface -> messages[GameInterface::MSG_HELP]);
 }
 
 void Game::onLook() {
@@ -33,9 +33,19 @@ void Game::onLook() {
 }
 
 void Game::onExamine(std::string s) {
-    Item* i = currentRoom -> getItemByName(s);
-	if (i) {  // Če ni nullptr
+    Item* i = currentRoom -> getItemByRefName(s);
+	if (i != nullptr) {  // Če ni nullptr
 		gameInterface -> out("    " + i -> getDescription());
+		Container* c = dynamic_cast<Container*> (i);
+		if (c != nullptr) {  // Če je predmet objekt tipa Container
+			if (c -> getOpen()) {
+				gameInterface -> out(c -> getOpenMessage());
+				c -> listItems();
+			} else {
+				gameInterface -> out(c -> getClosedMessage());
+			}
+		} else {
+		}
 	} else {
 		gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_ITEM_DESCRIPTION]);
 	}
@@ -214,6 +224,7 @@ void Game::onOpen(std::string s) {
 			gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_DEFAULT_CONTAINER_OPEN]);
 			if (c -> getOnOpen() != nullptr) {  // Če je določena, izvede funkcijo ob odprtju
 				(c -> getOnOpen())();
+				c -> listItems();
 			}
 		}
 	}
@@ -285,13 +296,6 @@ void Game::look() {
 	gameInterface -> out("");
 	currentRoom -> listItems();
 	currentRoom -> listExits();
-	int l = currentRoom -> getItems() -> size();
-	for (int i = 0; i < l; i++) {
-		Item* item = currentRoom -> getItems() -> at(i);
-		/*if (Container* dynamic_cast<Container>(Item)) {  // Izbrani predmet je tipa Container
-
-		}*/
-	}
 	gameInterface -> out("");
 }
 
@@ -338,7 +342,7 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 						break;
 					}
 				}
-				if (!i) {  // V sobi ni tega predmeta
+				if (i == nullptr) {  // V sobi ni tega predmeta
 					// Preveri za dejanja na predmetu v inventarju
 					Item* j = nullptr;
 					for (Item* item : *getInventory()) {
@@ -353,6 +357,7 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 					}
 					if (!j) {
 						gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
+						return false;
 					} else {
 	                    i = j;
 					}

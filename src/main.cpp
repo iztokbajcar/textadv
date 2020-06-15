@@ -57,7 +57,7 @@ void zahod() 		{game -> onMoveWest();}
 void vzhod() 		{game -> onMoveEast();}
 
 void test() {std::cout << "Test." << std::endl;}
-void omaraOpen() {std::cout << "    Ko odpreš omaro, ugotoviš, da je prazna." << std::endl;}
+void omaraOpen() {std::cout << "    Ko odpreš omaro, ugotoviš, da je bolj prostorna, kot je bilo sprva pričakovano." << std::endl;}
 
 int main() {
 	gameInterface = new GameInterface();
@@ -89,24 +89,24 @@ int main() {
 	game -> setMessage(GameInterface::MSG_ROOM_LOCKED, "Ta soba je zaklenjena.");
 	game -> setMessage(GameInterface::MSG_COMMAND_UNKNOWN, "Žal ne poznam tega ukaza.");
 	game -> setMessage(GameInterface::MSG_HELP,
-		"###############################\n"
-		"#            POMOČ            #\n"
-		"###############################\n"
-		"# IZHOD - konča igro          #\n"
-		"# POMOC - prikaže pomoč       #\n"
-		"# POGLEJ - opiše sobo         #\n"
-		"# POBERI p - pobere predmet p #\n"
-		"# PREGLEJ p - opiše predmet p #\n"
-		"# INV - prikaže inventar      #\n"
-		"# S - premik na sever         #\n"
-		"# J - premik na jug           #\n"
-		"# V - premik na vzhod         #\n"
-		"# Z - premik na zahod         #\n"
-		"# SV - premik na severovzhod  #\n"
-		"# SZ - premik na severozahod  #\n"
-		"# JV - premik na jugovzhod    #\n"
-		"# JZ - premik na jugozahod    #\n"
-		"###############################"
+		"    ###############################\n"
+		"    #            POMOČ            #\n"
+		"    ###############################\n"
+		"    # IZHOD - konča igro          #\n"
+		"    # POMOC - prikaže pomoč       #\n"
+		"    # POGLEJ - opiše sobo         #\n"
+		"    # POBERI p - pobere predmet p #\n"
+		"    # PREGLEJ p - opiše predmet p #\n"
+		"    # INV - prikaže inventar      #\n"
+		"    # S - premik na sever         #\n"
+		"    # J - premik na jug           #\n"
+		"    # V - premik na vzhod         #\n"
+		"    # Z - premik na zahod         #\n"
+		"    # SV - premik na severovzhod  #\n"
+		"    # SZ - premik na severozahod  #\n"
+		"    # JV - premik na jugovzhod    #\n"
+		"    # JZ - premik na jugozahod    #\n"
+		"    ###############################"
 	);
 	game -> setMessage(GameInterface::MSG_DIRS, "Izhodi: ");
 	game -> setMessage(GameInterface::MSG_NO_ITEMS_IN_ROOM, "V tej sobi ni predmetov.");
@@ -121,6 +121,8 @@ int main() {
 	game -> setMessage(GameInterface::MSG_ALREADY_CLOSED, "Je že bilo zaprto.");
 	game -> setMessage(GameInterface::MSG_CANNOT_OPEN, "Ne morem odpreti.");
 	game -> setMessage(GameInterface::MSG_CANNOT_CLOSE, "Ne morem zapreti.");
+	game -> setMessage(GameInterface::MSG_CONTAINER_EMPTY, "Notri ni ničesar.");
+	game -> setMessage(GameInterface::MSG_CONTAINER_CONTENTS, "Vsebina:");
 
 	game -> setDirection(GameInterface::DIR_NORTH, "S");
 	game -> setDirection(GameInterface::DIR_NORTHWEST, "SZ");
@@ -178,13 +180,18 @@ int main() {
 	soba2 = new Room(gameInterface, "~~ Druga soba ~~", "Druga soba pač.");
 
 	Item* kljuc = new Item(gameInterface, "ključ", "na tleh", "leži", true);
+	Item* svincnik = new Item(gameInterface, "svinčnik", "na dnu", "leži", true);
 	Container* omara = new Container(gameInterface, "omara", "v kotu", "stoji", false);
+
 	omara -> setRefName("omaro");
 	omara -> setOnOpen(&omaraOpen);
+	omara -> setOpenMessage("    Omara je odprta.");
+	omara -> setClosedMessage("    Omara je zaprta.");
 	std::cout << omara -> getOnOpen() << std::endl;
 
 	soba1 -> addItem(kljuc);
 	soba1 -> addItem(omara);
+	omara -> addItem(svincnik);
 	soba2 -> lock(kljuc);
 
 	game -> addRoom(soba1);

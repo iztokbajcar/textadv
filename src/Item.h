@@ -8,7 +8,6 @@
 
 namespace textadv {
 	class Item {
-		GameInterface* gameInterface;
 		std::string name;  // ime predmeta
 		std::string refName;  // ime v tožilniku
 		std::string description;  // opis predmeta
@@ -16,6 +15,9 @@ namespace textadv {
 		std::string location;  // lokacija predmeta
 		bool takeable;  // ali se predmet da pobrati
 		std::vector<Action> actions;
+		
+	protected:
+		GameInterface* gameInterface;
 
 	public:
 		Item(GameInterface* i, std::string n, std::string loc, bool t);
