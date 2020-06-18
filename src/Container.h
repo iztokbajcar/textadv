@@ -18,6 +18,7 @@ namespace textadv {
 		Container(GameInterface* i, std::string name, std::string loc, std::string desctor, bool t);  // konstruktor
 		void addItem(Item* item);
 		bool getOpen();
+		std::vector<Item*>* getItems();
 		std::string getOpenMessage();
 		std::string getClosedMessage();
 		void setOpen(bool b);

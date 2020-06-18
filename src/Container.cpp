@@ -16,6 +16,8 @@ void Container::addItem(Item* item) {
 	items.push_back(item);
 }
 
+std::vector<Item*>* Container::getItems() {return &items;}
+
 bool Container::getOpen() {return open;}
 void Container::setOpen(bool b) {open = b;}
 

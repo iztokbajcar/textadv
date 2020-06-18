@@ -356,8 +356,9 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 						}
 					}
 					if (!j) {
-						gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
-						return false;
+						/*gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_UNKNOWN]);
+						return false;*/
+						return predefinedComm(a);
 					} else {
 	                    i = j;
 					}
@@ -376,7 +377,7 @@ bool Game::loop(std::string* input) {  // Vrne true, če je treba zapreti igro
 			}
 		}
 	} else {
-		gameInterface -> out("EMPTY");
+		// Prazen input
 	}
 }
 
@@ -385,7 +386,7 @@ void Game::take(std::string s) {
 	for (int i = 0; i < currentRoom -> getItems() -> size(); i++) {
 		std::string name = currentRoom -> getItems() -> at(i) -> getRefName();
 		transform(name.begin(), name.end(), name.begin(), ::toupper);
-		if (name.substr(0, name.length() - 1) == s.substr(0, s.length() - 1)) {
+		if (name == s) {  // Predmet je v sobi
 			aliObstaja = true;
 			if (!currentRoom -> getItems() -> at(i) -> isTakeable()) {
 				gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
@@ -398,6 +399,31 @@ void Game::take(std::string s) {
 
 				gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
 				break;
+			}
+		} else {  // Preveri, ali je predmet objekt tipa Container
+			Container* c = dynamic_cast<Container*> (currentRoom -> getItems() -> at(i));
+			if (c != nullptr) {  // Predmet je Container
+				if (c -> getOpen()) {
+					for (int j = 0; j < c -> getItems() -> size(); j++) {
+						std::string n = c -> getItems() -> at(j) -> getRefName();
+						transform(n.begin(), n.end(), n.begin(), ::toupper);
+						if (n == s) {  // Container vsebuje želeni predmet
+							aliObstaja = true;
+							if (!c -> getItems() -> at(j) -> isTakeable()) {
+								gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_NOT_TAKEABLE]);
+							} else {
+								inventory.push_back(c -> getItems() -> at(j));
+
+								// Izbriše predmet iz "vsebnika"
+								delete(c -> getItems() -> at(j));
+								c -> getItems() -> erase(c -> getItems() -> begin() + j);
+
+								gameInterface -> out("    " + gameInterface -> messages[GameInterface::MSG_ITEM_TAKEN]);
+								break;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
